@@ -3,12 +3,16 @@
 namespace Luminix\Frontend\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Luminix\Frontend\Services\ManifestService;
+use Luminix\Frontend\Services\BootService;
 
-class Manifest extends Facade
+/**
+ * 
+ * @method static array get()
+ */
+class Boot extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return ManifestService::class;
+        return BootService::class;
     }
 }

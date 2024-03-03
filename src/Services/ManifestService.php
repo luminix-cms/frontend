@@ -92,6 +92,13 @@ class ManifestService
         if (!empty($routes)) {
             $this->manifest['routes'] = $routes;
         }
+
+        return $this;
+    }
+
+    public function get()
+    {
+        return $this->manifest;
     }
 }
 
