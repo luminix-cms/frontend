@@ -5,9 +5,9 @@ namespace Luminix\Frontend;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Luminix\Frontend\Commands\ManifestCommand;
 use Luminix\Frontend\Facades\Boot;
 use Luminix\Frontend\Services\JsService;
-use Luminix\Frontend\Services\ManifestService;
 
 class FrontendServiceProvider extends ServiceProvider
 {
@@ -16,6 +16,8 @@ class FrontendServiceProvider extends ServiceProvider
         $this->app->singleton(JsService::class, function () {
             return new JsService();
         });
+
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
 
         $this->loadViewsFrom(__DIR__ . '/../views', 'luminix');
 
@@ -27,16 +29,23 @@ class FrontendServiceProvider extends ServiceProvider
             /** @var JsService */
             if (config('luminix.frontend.boot.method', 'api') === 'embed') {
                 $boot = Boot::get();
-                $js = app(JsService::class);
-                foreach ($boot as $key => $value) {
-                    $js->set($key, $value);
-                }
+                $js = app(JsService::class);                
+                $js->set('config', $boot);
+
             }
         });
     }
 
     public function register()
     {
-        
+        $this->commands([
+            ManifestCommand::class,
+        ]);
+
+        $this->mergeConfigFrom(__DIR__ . '/../config/frontend.php', 'luminix.frontend');
+
+        $this->publishes([
+            __DIR__ . '/../config/frontend.php' => config_path('luminix/frontend.php'),
+        ], 'luminix-config');
     }
 }

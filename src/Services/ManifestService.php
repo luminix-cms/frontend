@@ -17,8 +17,8 @@ class ManifestService
 
     protected ModelFinder $modelFinder;
     protected array $manifest = [
-        'models' => new \stdClass,
-        'routes' => new \stdClass,
+        'models' => [],
+        'routes' => [],
     ];
 
     public function __construct(
@@ -36,10 +36,10 @@ class ManifestService
         $routes = [];
         
         foreach ($modelList as $alias => $model) {
-            if (in_array($alias, Config::get('luminix.frontend.exclude.models', []))) {
+            if (in_array($alias, Config::get('luminix.frontend.models.exclude', []))) {
                 continue;
             }
-            if (!$this->app->runningInConsole() && !Auth::check() && !in_array($alias, Config::get('luminix.frontend.public.models', []))) {
+            if (!$this->app->runningInConsole() && !Auth::check() && !in_array($alias, Config::get('luminix.frontend.models.public', []))) {
                 continue;
             }
             
@@ -68,11 +68,11 @@ class ManifestService
 
 
         foreach ($routeList as $name => $route) {
-            if (in_array($name, Config::get('luminix.frontend.exclude.routes', []) + ['luminix.init'])) {
+            if (in_array($name, Config::get('luminix.frontend.routes.exclude', []) + ['luminix.init'])) {
                 continue;
             }
 
-            if (!$this->app->runningInConsole() && !Auth::check() && !in_array($name, Config::get('luminix.frontend.public.routes', []))) {
+            if (!$this->app->runningInConsole() && !Auth::check() && !in_array($name, Config::get('luminix.frontend.routes.public', []))) {
                 continue;
             }
 
@@ -85,12 +85,15 @@ class ManifestService
             ]);
         }
 
-        if (!empty($models)) {
-            $this->manifest['models'] = $models;
+        $this->manifest['models'] = $models;
+        $this->manifest['routes'] = $routes;
+
+        if (empty($this->manifest['models'])) {
+            $this->manifest['models'] = new \stdClass;
         }
 
-        if (!empty($routes)) {
-            $this->manifest['routes'] = $routes;
+        if (empty($this->manifest['routes'])) {
+            $this->manifest['routes'] = new \stdClass;
         }
 
         return $this;

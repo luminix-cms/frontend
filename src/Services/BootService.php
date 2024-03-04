@@ -23,6 +23,10 @@ class BootService {
             $boot['manifest'] = $manifest->make()->get();
         }
 
+        if (static::hasMacro('onInit')) {
+            $boot = static::onInit($boot);
+        }
+
         return $boot;
     }
 }
