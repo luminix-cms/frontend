@@ -7,13 +7,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Traits\Macroable;
+
 use Luminix\Backend\Services\ModelFinder;
+use Luminix\Backend\Contracts\Reduceable;
 
 class ManifestService
 {
 
-    use Macroable;
+    use Reduceable;
 
     protected ModelFinder $modelFinder;
     protected array $manifest = [
@@ -58,12 +59,9 @@ class ManifestService
                 'relations' => $instance->getRelationships(),
             ];
 
-            if (static::hasMacro('modelManifest')) {
-                $models[$alias] = static::modelManifest($models[$alias], $model);
-            }
-            if (static::hasMacro('model' . class_basename($model) . 'Manifest')) {
-                $models[$alias] = static::{'model' . class_basename($model) . 'Manifest'}($models[$alias], $model);
-            }
+            $models[$alias] = static::modelManifest($models[$alias], $model);
+            $models[$alias] = static::{'model' . class_basename($model) . 'Manifest'}($models[$alias]);
+
         }
 
 

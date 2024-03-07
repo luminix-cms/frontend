@@ -3,7 +3,7 @@
 namespace Luminix\Frontend\Commands;
 
 use Illuminate\Console\Command;
-use Luminix\Frontend\Facades\Boot;
+use Luminix\Frontend\Services\ManifestService;
 
 class ManifestCommand extends Command
 {
@@ -22,9 +22,12 @@ class ManifestCommand extends Command
         }
         $this->info('Creating manifest file...');
 
-        $filepath = $this->option('path') ?? resource_path('js/config/boot.json');
+        $filepath = $this->option('path') ?? resource_path('js/config/manifest.json');
 
-        file_put_contents($filepath, json_encode(Boot::get(), JSON_PRETTY_PRINT));
+        /** @var ManifestService */
+        $manifest = app(ManifestService::class);
+
+        file_put_contents($filepath, json_encode($manifest->make()->get(), JSON_PRETTY_PRINT));
 
         $this->info('Manifest file created successfully!');
 

@@ -2,11 +2,12 @@
 
 namespace Luminix\Frontend\Services;
 
-use Illuminate\Support\Traits\Macroable;
+use Luminix\Backend\Contracts\Reduceable;
+use Luminix\Frontend\Events\Init;
 
 class BootService {
 
-    use Macroable;
+    use Reduceable;
 
     public function get()
     {
@@ -23,9 +24,9 @@ class BootService {
             $boot['manifest'] = $manifest->make()->get();
         }
 
-        if (static::hasMacro('onInit')) {
-            $boot = static::onInit($boot);
-        }
+        $boot = static::initConfig($boot);
+
+        event(new Init($boot));
 
         return $boot;
     }
