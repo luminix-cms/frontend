@@ -2,12 +2,12 @@
 
 namespace Luminix\Frontend\Services;
 
-use Luminix\Backend\Contracts\Reduceable;
+use Arandu\Reducible\Reducible;
 use Luminix\Frontend\Events\Init;
 
 class BootService {
 
-    use Reduceable;
+    use Reducible;
 
     public function get()
     {

@@ -2,6 +2,7 @@
 
 namespace Luminix\Frontend\Services;
 
+use Arandu\Reducible\Reducible;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -9,12 +10,11 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 use Luminix\Backend\Services\ModelFinder;
-use Luminix\Backend\Contracts\Reduceable;
 
 class ManifestService
 {
 
-    use Reduceable;
+    use Reducible;
 
     protected ModelFinder $modelFinder;
     protected array $manifest = [
@@ -54,8 +54,6 @@ class ManifestService
                 'labeledBy' => $instance->getLabel(),
                 'timestamps' => $instance->usesTimestamps(),
                 'softDeletes' => $this->modelFinder->classUses($model, \Illuminate\Database\Eloquent\SoftDeletes::class),
-                'importable' => $this->modelFinder->classUses($model, \Luminix\Backend\Model\Importable::class),
-                'exportable' => $this->modelFinder->classUses($model, \Luminix\Backend\Model\Exportable::class),
                 'relations' => $instance->getRelationships(),
             ];
 
