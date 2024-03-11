@@ -1,4 +1,4 @@
-<div id="luminix-embed" style="display: none">
+<div id="luminix-embed" style="display: none" aria-hidden="true">
     @if ('embed' === config('luminix.frontend.boot.method', 'api'))
         <div id="luminix-data::config" data-json="1" data-value="{{json_encode(Luminix\Frontend\Facades\Boot::get())}}"></div>
     @endif

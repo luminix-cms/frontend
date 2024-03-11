@@ -43,7 +43,7 @@ class FrontendServiceProvider extends ServiceProvider
                 $arguments = trim($arguments, '\'"');
                 $catchables = explode('|', $arguments);
                 $directive .= "->with('catchables', ["
-                    .  collect($catchables)->map(function ($catchable) {
+                    . collect($catchables)->map(function ($catchable) {
                         return "'$catchable'";
                     })->join(', ')
                     . "])";
