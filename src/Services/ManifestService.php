@@ -48,6 +48,7 @@ class ManifestService
             $instance = new $model;
 
             $models[$alias] = [
+                'displayName' => $model::getDisplayName(),
                 'fillable' => $instance->getFillable(),
                 'casts' => $instance->getCasts(),
                 'primaryKey' => $instance->getKeyName(),
