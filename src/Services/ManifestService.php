@@ -29,7 +29,7 @@ class ManifestService
         $this->modelFinder = app(ModelFinder::class);    
     }
 
-    public function make()
+    public function make($noAuth = false): self
     {
         $modelList = $this->modelFinder->all();
         $routeList = Route::getRoutes()->getRoutesByName();
@@ -40,7 +40,7 @@ class ManifestService
             if (in_array($alias, Config::get('luminix.frontend.models.exclude', []))) {
                 continue;
             }
-            if (!$this->app->runningInConsole() && !Auth::check() && !in_array($alias, Config::get('luminix.frontend.models.public', []))) {
+            if ((!$this->app->runningInConsole() || $noAuth) && !Auth::check() && !in_array($alias, Config::get('luminix.frontend.models.public', []))) {
                 continue;
             }
             
@@ -69,7 +69,7 @@ class ManifestService
                 continue;
             }
 
-            if (!$this->app->runningInConsole() && !Auth::check() && !in_array($name, Config::get('luminix.frontend.routes.public', []))) {
+            if ((!$this->app->runningInConsole() || $noAuth) && !Auth::check() && !in_array($name, Config::get('luminix.frontend.routes.public', []))) {
                 continue;
             }
 
