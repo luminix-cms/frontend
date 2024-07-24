@@ -30,15 +30,15 @@ class TestCase extends TestbenchTestCase
     {
         $app['config']->set('app.debug', true);
         $app['config']->set('luminix.backend.security.middleware', ['web']);
-        $app['config']->set('luminix.backend.models.include', [
-            'Workbench\App\Models\User',
-            'Workbench\App\Models\ToDo',
-            'Workbench\App\Models\Category',
-        ]);
-        $app['config']->set('luminix.backend.api.controller_overrides', [
-            'Workbench\App\Models\ToDo' => 'Workbench\App\Http\Controllers\ToDoController',
-        ]);
-        $app['config']->set('auth', require __DIR__.'/../../config/auth.ci.php');
+        // $app['config']->set('luminix.backend.models.include', [
+        //     'Workbench\App\Models\User',
+        //     'Workbench\App\Models\ToDo',
+        //     'Workbench\App\Models\Category',
+        // ]);
+        // $app['config']->set('luminix.backend.api.controller_overrides', [
+        //     'Workbench\App\Models\ToDo' => 'Workbench\App\Http\Controllers\ToDoController',
+        // ]);
+        // $app['config']->set('auth', require __DIR__.'/../../config/auth.ci.php');
     }
 
 
