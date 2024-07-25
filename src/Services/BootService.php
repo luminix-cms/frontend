@@ -12,6 +12,11 @@ class BootService {
     public function get()
     {
         $boot = [
+            'app' => [
+                'name' => config('app.name', 'Laravel'),
+                'debug' => config('app.debug', false),
+                'url' => config('app.url', ''),
+            ],
             'auth' => [
                 'user' => auth()->user(),
                 'csrf' => csrf_token(),
