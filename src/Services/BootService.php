@@ -14,6 +14,7 @@ class BootService {
         $boot = [
             'app' => [
                 'name' => config('app.name', 'Laravel'),
+                'env' => config('app.env', 'production'),
                 'debug' => config('app.debug', false),
                 'url' => config('app.url', ''),
             ],
