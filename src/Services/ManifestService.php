@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 use Luminix\Backend\Services\ModelFinder;
+use Spatie\ModelInfo\ModelInfo;
 
 class ManifestService
 {
@@ -48,6 +49,7 @@ class ManifestService
             $instance = new $model;
 
             $models[$alias] = [
+                'attributes' => ModelInfo::forModel($model)->attributes,
                 'displayName' => $model::getDisplayName(),
                 'fillable' => $instance->getFillable(),
                 'casts' => $instance->getCasts(),
