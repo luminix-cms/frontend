@@ -30,7 +30,7 @@ class BootService {
             $boot['manifest'] = $manifest->make()->get();
         }
 
-        $boot = static::initConfig($boot);
+        $boot = static::wireConfig($boot);
 
         event(new Init($boot));
 
