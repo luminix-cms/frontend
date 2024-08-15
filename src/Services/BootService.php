@@ -17,6 +17,8 @@ class BootService {
                 'env' => config('app.env', 'production'),
                 'debug' => config('app.debug', false),
                 'url' => config('app.url', ''),
+                'locale' => config('app.locale', 'en'),
+                'fallback_locale' => config('app.fallback_locale', 'en'),
             ],
             'auth' => [
                 'user' => auth()->user(),
