@@ -17,7 +17,7 @@ class FrontendServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../views', 'luminix');
 
-        $this->registerLuminixEmbedDirective();
+        $this->luminixEmbed();
 
     }
 
@@ -34,7 +34,7 @@ class FrontendServiceProvider extends ServiceProvider
         ], 'luminix-config');
     }
 
-    public function registerLuminixEmbedDirective()
+    public function luminixEmbed()
     {
         Blade::directive('luminixEmbed', function (string $arguments) {
             $directive = "<?php echo view('luminix::embed')";
