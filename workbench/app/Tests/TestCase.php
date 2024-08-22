@@ -17,8 +17,6 @@ class TestCase extends TestbenchTestCase
 
     protected function getPackageProviders($app)
     {
-        
-
         return [
             \Luminix\Backend\BackendServiceProvider::class,
             \Luminix\Frontend\FrontendServiceProvider::class,
