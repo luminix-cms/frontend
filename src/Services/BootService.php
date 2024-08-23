@@ -16,7 +16,7 @@ class BootService {
                 'name' => config('app.name', 'Laravel'),
                 'env' => config('app.env', 'production'),
                 'debug' => config('app.debug', false),
-                'url' => config('app.url', ''),
+                'url' => config('app.url', 'http://localhost'),
                 'locale' => config('app.locale', 'en'),
                 'fallback_locale' => config('app.fallback_locale', 'en'),
             ],
