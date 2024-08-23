@@ -4,15 +4,17 @@ namespace Workbench\App\Tests\Feature;
 
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
-use stdClass;
+use Workbench\App\Tests\TestCase;
 
-class BootEmbedTest extends BootTestCase
+class BootEmbedTest extends TestCase
 {
     use InteractsWithViews; 
 
 
     protected function defineEnvironment($app)
     {
+        parent::defineEnvironment($app);
+
         $app['config']->set('luminix.frontend.boot.method', 'embed');
         $app['config']->set('luminix.frontend.boot.includes_manifest', true);
     }
@@ -41,21 +43,24 @@ class BootEmbedTest extends BootTestCase
         
         $view->assertSee('luminix-data::config');
 
-        $expected_json = new stdClass();
+        $xmlObj = simplexml_load_string($view);
 
-        foreach (array_keys($this->expected) as $key) {
-            if (in_array($key, [ 'manifest' ])) {
-                $expected_json->$key = new stdClass;
+        $config = [];
 
-                foreach (array_keys($this->expected[$key]) as $k) {                    
-                    $expected_json->$key->$k = new stdClass;
+        foreach ((array) $xmlObj as $key => $value) {
+            if ($key == 'div') {
+                
+                $value = (array) $value;
+                
+                foreach ($value['@attributes'] as $k => $attributes) {
+                    if ($k == 'data-value') {
+                        $config = json_decode($attributes, true);
+                    }
                 }
-            } else {
-                $expected_json->$key = $this->expected[$key];
             }
         }
 
-        $view->assertSee(json_encode($expected_json));
+        $this->assertEquals($this->expected_config, $config);
     }
     
 }

@@ -10,8 +10,7 @@ use Luminix\Backend\Model\LuminixModel;
 
 class Post extends Model
 {
-    use HasFactory;
-    use LuminixModel;
+    use HasFactory, LuminixModel;
 
     protected $fillable = [
         'title',

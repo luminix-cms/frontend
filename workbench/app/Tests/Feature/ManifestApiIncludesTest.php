@@ -2,22 +2,26 @@
 
 namespace Workbench\App\Tests\Feature;
 
-use Illuminate\Foundation\Testing\Concerns\InteractsWithViews; 
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
-class ManifestApiIncludesTest extends ManifestTest
+use Workbench\App\Tests\TestCase;
+
+class ManifestApiIncludesTest extends TestCase
 {
     use InteractsWithViews; 
 
+
     protected function defineEnvironment($app)
     {
+        parent::defineEnvironment($app);
+
         $app['config']->set('luminix.frontend.boot.method', 'api');
+        $app['config']->set('luminix.frontend.boot.includes_manifest', true);
     }
 
 
     public function test_if_manifest_is_generated_via_api()
     {
-        $expected_keys = array_keys($this->expected);
-
         $from_api = $this->json('GET', '/luminix-api/init');
         $from_api = $from_api->json();
 
@@ -28,23 +32,12 @@ class ManifestApiIncludesTest extends ManifestTest
         }
 
         $manifest = $from_api['manifest'];
-        // dd($manifest);
 
         if (empty($manifest)) {
             $this->assertTrue(false);
         }
 
-        $this->assertEquals($expected_keys, array_keys($manifest));
-
-        foreach ($this->expected as $key => $value) {
-            foreach ($value as $param => $val) {
-                if (!isset($manifest[$key][$param])) {
-                    $this->assertTrue(false);
-                } else {
-                    $this->assertEquals($manifest[$key][$param], $val);
-                }
-            }
-        }
+        $this->assertEquals($this->expected_config['manifest'], $manifest);
     }
 
 }

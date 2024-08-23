@@ -2,11 +2,15 @@
 
 namespace Workbench\App\Tests\Feature;
 
-class ManifestFileTest extends ManifestTest
+use Workbench\App\Tests\TestCase;
+
+class ManifestFileTest extends TestCase
 {
 
     protected function defineEnvironment($app)
     {
+        parent::defineEnvironment($app);
+
         $app['config']->set('luminix.frontend.boot.includes_manifest', false);
     }
 
@@ -21,9 +25,9 @@ class ManifestFileTest extends ManifestTest
         $resolve->assertSuccessful();
     }
 
-    public function test_if_application_data_is_generated_via_command()
+    public function test_if_manifest_file_is_generated_via_command()
     {
-        $expected_keys = array_keys($this->expected);
+        $expected_keys = array_keys($this->expected_config['manifest']);
 
         $file = $this->resourcePath('js/config/manifest.json');
 
@@ -34,17 +38,19 @@ class ManifestFileTest extends ManifestTest
             $this->assertTrue(false);
         }
 
-        $this->assertEquals($expected_keys, array_keys($manifest));
+        // $this->assertEquals($expected_keys, array_keys($manifest));
 
-        foreach ($this->expected as $key => $value) {
-            foreach ($value as $param => $val) {
-                if (!isset($manifest[$key][$param])) {
-                    $this->assertTrue(false);
-                } else {
-                    $this->assertEquals($manifest[$key][$param], $val);
-                }
-            }
-        }
+        $this->assertEquals($this->expected_config['manifest'], $manifest);
+
+        // foreach ($this->expected_config['manifest'] as $key => $value) {
+        //     foreach ($value as $param => $val) {
+        //         if (!isset($manifest[$key][$param])) {
+        //             $this->assertTrue(false);
+        //         } else {
+        //             $this->assertEquals($manifest[$key][$param], $val);
+        //         }
+        //     }
+        // }
     }
 
 }

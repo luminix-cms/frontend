@@ -1,4 +1,358 @@
 {
-    "models": {},
-    "routes": {}
+    "models": {
+        "user": {
+            "attributes": [
+                {
+                    "name": "id",
+                    "phpType": "int",
+                    "type": "integer",
+                    "increments": true,
+                    "nullable": false,
+                    "default": null,
+                    "primary": true,
+                    "unique": true,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": "int",
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "name",
+                    "phpType": "string",
+                    "type": "varchar",
+                    "increments": false,
+                    "nullable": false,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": true,
+                    "appended": null,
+                    "cast": null,
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "email",
+                    "phpType": "string",
+                    "type": "varchar",
+                    "increments": false,
+                    "nullable": false,
+                    "default": null,
+                    "primary": false,
+                    "unique": true,
+                    "fillable": true,
+                    "appended": null,
+                    "cast": null,
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "email_verified_at",
+                    "phpType": "\\Carbon\\CarbonInterface",
+                    "type": "datetime",
+                    "increments": false,
+                    "nullable": true,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": "datetime",
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "password",
+                    "phpType": "string",
+                    "type": "varchar",
+                    "increments": false,
+                    "nullable": false,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": true,
+                    "appended": null,
+                    "cast": "hashed",
+                    "virtual": false,
+                    "hidden": true
+                },
+                {
+                    "name": "remember_token",
+                    "phpType": "string",
+                    "type": "varchar",
+                    "increments": false,
+                    "nullable": true,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": null,
+                    "virtual": false,
+                    "hidden": true
+                },
+                {
+                    "name": "created_at",
+                    "phpType": "\\Carbon\\CarbonInterface",
+                    "type": "datetime",
+                    "increments": false,
+                    "nullable": true,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": "datetime",
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "updated_at",
+                    "phpType": "\\Carbon\\CarbonInterface",
+                    "type": "datetime",
+                    "increments": false,
+                    "nullable": true,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": "datetime",
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "age",
+                    "phpType": "int",
+                    "type": null,
+                    "increments": false,
+                    "nullable": null,
+                    "default": null,
+                    "primary": null,
+                    "unique": null,
+                    "fillable": false,
+                    "appended": true,
+                    "cast": "accessor",
+                    "virtual": true,
+                    "hidden": false
+                }
+            ],
+            "displayName": {
+                "singular": "User",
+                "plural": "Users"
+            },
+            "fillable": [
+                "name",
+                "email",
+                "password"
+            ],
+            "casts": {
+                "id": "int",
+                "email_verified_at": "datetime",
+                "password": "hashed"
+            },
+            "primaryKey": "id",
+            "labeledBy": "name",
+            "timestamps": true,
+            "softDeletes": false,
+            "relations": {
+                "posts": {
+                    "type": "HasMany",
+                    "model": "post",
+                    "foreignKey": "user_id",
+                    "ownerKey": null
+                }
+            }
+        },
+        "post": {
+            "attributes": [
+                {
+                    "name": "id",
+                    "phpType": "int",
+                    "type": "integer",
+                    "increments": true,
+                    "nullable": false,
+                    "default": null,
+                    "primary": true,
+                    "unique": true,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": "int",
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "title",
+                    "phpType": "string",
+                    "type": "varchar",
+                    "increments": false,
+                    "nullable": false,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": true,
+                    "appended": null,
+                    "cast": null,
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "slug",
+                    "phpType": "string",
+                    "type": "varchar",
+                    "increments": false,
+                    "nullable": false,
+                    "default": null,
+                    "primary": false,
+                    "unique": true,
+                    "fillable": true,
+                    "appended": null,
+                    "cast": null,
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "content",
+                    "phpType": "string",
+                    "type": "text",
+                    "increments": false,
+                    "nullable": false,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": true,
+                    "appended": null,
+                    "cast": null,
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "user_id",
+                    "phpType": "int",
+                    "type": "integer",
+                    "increments": false,
+                    "nullable": false,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": null,
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "created_at",
+                    "phpType": "\\Carbon\\CarbonInterface",
+                    "type": "datetime",
+                    "increments": false,
+                    "nullable": true,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": "datetime",
+                    "virtual": false,
+                    "hidden": false
+                },
+                {
+                    "name": "updated_at",
+                    "phpType": "\\Carbon\\CarbonInterface",
+                    "type": "datetime",
+                    "increments": false,
+                    "nullable": true,
+                    "default": null,
+                    "primary": false,
+                    "unique": false,
+                    "fillable": false,
+                    "appended": null,
+                    "cast": "datetime",
+                    "virtual": false,
+                    "hidden": false
+                }
+            ],
+            "displayName": {
+                "singular": "Post",
+                "plural": "Posts"
+            },
+            "fillable": [
+                "title",
+                "slug",
+                "content"
+            ],
+            "casts": {
+                "id": "int"
+            },
+            "primaryKey": "id",
+            "labeledBy": "title",
+            "timestamps": true,
+            "softDeletes": false,
+            "relations": {
+                "user": {
+                    "type": "BelongsTo",
+                    "model": "user",
+                    "foreignKey": "user_id",
+                    "ownerKey": "id"
+                }
+            }
+        }
+    },
+    "routes": {
+        "luminix": {
+            "user": {
+                "index": [
+                    "luminix-api\/users",
+                    "get"
+                ],
+                "store": [
+                    "luminix-api\/users",
+                    "post"
+                ],
+                "show": [
+                    "luminix-api\/users\/{id}",
+                    "get"
+                ],
+                "update": [
+                    "luminix-api\/users\/{id}",
+                    "post"
+                ],
+                "destroy": [
+                    "luminix-api\/users\/{id}",
+                    "delete"
+                ],
+                "destroyMany": [
+                    "luminix-api\/users",
+                    "delete"
+                ]
+            },
+            "post": {
+                "index": [
+                    "luminix-api\/posts",
+                    "get"
+                ],
+                "store": [
+                    "luminix-api\/posts",
+                    "post"
+                ],
+                "show": [
+                    "luminix-api\/posts\/{id}",
+                    "get"
+                ],
+                "update": [
+                    "luminix-api\/posts\/{id}",
+                    "post"
+                ],
+                "destroy": [
+                    "luminix-api\/posts\/{id}",
+                    "delete"
+                ],
+                "destroyMany": [
+                    "luminix-api\/posts",
+                    "delete"
+                ]
+            }
+        }
+    }
 }

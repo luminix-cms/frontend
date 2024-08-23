@@ -12,8 +12,7 @@ use Luminix\Backend\Model\LuminixModel;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
-    use LuminixModel;
+    use HasFactory, Notifiable, LuminixModel;
 
     /**
      * The attributes that are mass assignable.
