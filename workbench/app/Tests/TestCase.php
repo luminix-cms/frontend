@@ -27,7 +27,8 @@ class TestCase extends TestbenchTestCase
     protected function defineEnvironment($app)
     {
         $app['config']->set('app.debug', true);
-        $app['config']->set('app.env', 'local');
+        // $app['config']->set('app.env', 'local');
+        $app['config']->set('app.env', 'testing');
         $app['config']->set('app.locale', 'pt-BR');
 
         $app['config']->set('luminix.backend.security.middleware', ['web']);
@@ -38,7 +39,7 @@ class TestCase extends TestbenchTestCase
 
         // $app['config']->set('auth', require __DIR__.'/../../config/auth.ci.php');
     }
-    
+
 
     protected function setUp(): void
     {
@@ -64,8 +65,8 @@ class TestCase extends TestbenchTestCase
 
     protected function resourcePath($path = '')
     {
-        $workbench = explode('workbench', __DIR__)[0];
+        $dir_path = explode('workbench', __DIR__)[0];
 
-        return $workbench . 'workbench/resources/' . $path;
+        return $dir_path . 'workbench/resources/' . $path;
     }
 }

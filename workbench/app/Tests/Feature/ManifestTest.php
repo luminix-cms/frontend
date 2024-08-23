@@ -319,12 +319,9 @@ class ManifestTest extends TestCase
         $this->assertTrue($commands->has('luminix:manifest'));
     }
 
-    public function test_execute_admin_manifest_command()
+    public function test_execute_admin_manifest_command_when_including_manifest()
     {
-        $resolve = $this->artisan(
-            'luminix:manifest', 
-            [ '--path' => $this->resourcePath('js/config') ]
-        );
+        $resolve = $this->artisan('luminix:manifest');
 
         $resolve->assertFailed();
     }

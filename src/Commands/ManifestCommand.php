@@ -25,14 +25,16 @@ class ManifestCommand extends Command
 
         $infix = $this->option('no-auth') ? '.public' : '';
 
-        $filepath = $this->option('path') ?? resource_path("js/config/manifest{$infix}.json");
+        $folder_path = $this->option('path') ?? resource_path("js/config");
 
         /** @var ManifestService */
         $manifest = app(ManifestService::class);
 
-        if (!file_exists(resource_path('js/config'))) {
-            mkdir(resource_path('js/config'));
+        if (!file_exists($folder_path)) {
+            mkdir($folder_path);
         }
+
+        $filepath = $folder_path . "/manifest{$infix}.json";
 
         file_put_contents($filepath, json_encode($manifest->make($this->option('no-auth'))->get(), JSON_PRETTY_PRINT));
 

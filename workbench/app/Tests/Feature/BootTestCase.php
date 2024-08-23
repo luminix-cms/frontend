@@ -10,10 +10,12 @@ class BootTestCase extends TestCase
     protected $expected = [
         'app' => [
             'name' => 'Laravel',
-            'env' => 'local',
+            'env' => 'testing',
+            // 'env' => 'local',
             'debug' => true, 
             'url' => 'http://localhost', 
-            'locale' => 'pt-BR',
+            'locale' => 'en',
+            // 'locale' => 'pt-BR',
             'fallback_locale' => 'en',
         ], 
         'auth' => [

@@ -11,7 +11,7 @@ class ManifestFileTest extends ManifestTest
     }
 
 
-    public function test_execute_admin_manifest_command()
+    public function test_execute_admin_manifest_command_when_not_including_manifest()
     {
         $resolve = $this->artisan(
             'luminix:manifest', 
