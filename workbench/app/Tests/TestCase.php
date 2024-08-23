@@ -27,23 +27,23 @@ class TestCase extends TestbenchTestCase
     protected function defineEnvironment($app)
     {
         $app['config']->set('app.debug', true);
+        $app['config']->set('app.env', 'local');
+        $app['config']->set('app.locale', 'pt-BR');
+
         $app['config']->set('luminix.backend.security.middleware', ['web']);
-        // $app['config']->set('luminix.backend.models.include', [
-        //     'Workbench\App\Models\User',
-        //     'Workbench\App\Models\ToDo',
-        //     'Workbench\App\Models\Category',
-        // ]);
-        // $app['config']->set('luminix.backend.api.controller_overrides', [
-        //     'Workbench\App\Models\ToDo' => 'Workbench\App\Http\Controllers\ToDoController',
-        // ]);
+        $app['config']->set('luminix.backend.models.include', [
+            'Workbench\App\Models\User',
+            'Workbench\App\Models\Post',
+        ]);
+
         // $app['config']->set('auth', require __DIR__.'/../../config/auth.ci.php');
     }
-
-
+    
 
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->seed(DatabaseSeeder::class);
     }
 
@@ -59,5 +59,13 @@ class TestCase extends TestbenchTestCase
         $this->beforeApplicationDestroyed(
             fn () => artisan($this, 'migrate:rollback', ['--database' => 'testing'])
         );
+    }
+    
+
+    protected function resourcePath($path = '')
+    {
+        $workbench = explode('workbench', __DIR__)[0];
+
+        return $workbench . 'workbench/resources/' . $path;
     }
 }
