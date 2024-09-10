@@ -8,8 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
-
-use Luminix\Backend\Services\ModelFinder;
+use Luminix\Backend\Facades\Finder;
 use Spatie\ModelInfo\ModelInfo;
 
 class ManifestService
@@ -17,7 +16,6 @@ class ManifestService
 
     use Reducible;
 
-    protected ModelFinder $modelFinder;
     protected array $manifest = [
         'models' => [],
         'routes' => [],
@@ -26,13 +24,12 @@ class ManifestService
     public function __construct(
         protected \Illuminate\Contracts\Foundation\Application $app
     )
-    {
-        $this->modelFinder = app(ModelFinder::class);    
+    {  
     }
 
     public function make($noAuth = false): self
     {
-        $modelList = $this->modelFinder->all();
+        $modelList = Finder::all();
         $routeList = Route::getRoutes()->getRoutesByName();
         $models = [];
         $routes = [];
@@ -56,7 +53,7 @@ class ManifestService
                 'primaryKey' => $instance->getKeyName(),
                 'labeledBy' => $instance->getLabel(),
                 'timestamps' => $instance->usesTimestamps(),
-                'softDeletes' => $this->modelFinder->classUses($model, \Illuminate\Database\Eloquent\SoftDeletes::class),
+                'softDeletes' => Finder::classUses($model, \Illuminate\Database\Eloquent\SoftDeletes::class),
                 'relations' => $instance->getRelationships(),
             ];
 
