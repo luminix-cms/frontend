@@ -24,7 +24,7 @@
         "php": "^8.2",
         "illuminate/support": "^11.0",
         "illuminate/database": "^11.0",
-        "luminix/backend": "0.x-dev",
+        "luminix/backend": "1.x-dev",
         "arandu/reducible": "^1.0"
     },
     "require-dev": {
