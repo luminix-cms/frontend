@@ -42,7 +42,7 @@ class ManifestService
                 continue;
             }
             
-            /** @var Model */
+            /** @var \Illuminate\Database\Eloquent\Model&\Luminix\Backend\Contracts\LuminixModelInterface */
             $instance = new $model;
 
             $models[$alias] = [
