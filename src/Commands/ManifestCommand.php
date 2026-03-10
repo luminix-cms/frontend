@@ -16,11 +16,6 @@ class ManifestCommand extends Command
 
     public function handle()
     {
-        if (config('luminix.frontend.boot.includes_manifest', true)) {
-            $this->error('Manifest data is already included in the boot process.');
-            $this->error('Set the "include_manifest" configuration in `config/luminix/frontend.php` to `false` to enable this command.');
-            return 1;
-        }
         $this->info('Creating manifest file...');
 
         $infix = $this->option('no-auth') ? '.public' : '';
