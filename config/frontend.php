@@ -16,19 +16,6 @@ return [
 
         /**
          *
-         * The 'method' configuration controls how the boot data is delivered
-         * to the frontend. 
-         *
-         * Available options:
-         *  - 'api' (default): will deliver the boot data via an API endpoint. 
-         *  - 'embed': will deliver the boot data via an embedded element in the view,
-         * through the `@luminixEmbed()` directive.
-         *
-         */
-        'method' => 'api',
-
-        /**
-         *
          * The 'includes_manifest' configuration controls whether or not the frontend
          * will include the manifest data in the response. If set to false, the manifest
          * JSON must be bundled into the frontend application, and should be generated
@@ -36,14 +23,6 @@ return [
          *
          */
         'includes_manifest' => true,
-
-        /**
-         *
-         * The 'middleware' configuration is used when the boot method is 'api'. It
-         * contains the list of middleware that will be applied to the boot route.
-         *
-         */
-        'middleware' => ['api'],
 
     ],
 

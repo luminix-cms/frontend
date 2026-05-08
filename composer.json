@@ -24,7 +24,7 @@
         "php": "^8.2",
         "illuminate/support": "^11.0",
         "illuminate/database": "^11.0",
-        "luminix/backend": "1.x-dev",
+        "luminix/backend": "^1.0",
         "arandu/reducible": "^1.0"
     },
     "require-dev": {
@@ -32,7 +32,7 @@
         "orchestra/testbench": "^9.0"
     },
     "scripts": {
-        "test": "phpunit",
+        "test": "@php vendor/bin/testbench package:test",
         "post-autoload-dump": [
             "@clear",
             "@prepare"

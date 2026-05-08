@@ -3,17 +3,13 @@
 namespace Luminix\Frontend;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Luminix\Frontend\Commands\ManifestCommand;
-use Luminix\Frontend\Facades\Boot;
 
 class FrontendServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-
-        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
 
         $this->loadViewsFrom(__DIR__ . '/../views', 'luminix');
 

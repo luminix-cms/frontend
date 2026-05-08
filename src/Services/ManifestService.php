@@ -64,7 +64,7 @@ class ManifestService
 
 
         foreach ($routeList as $name => $route) {
-            if (in_array($name, Config::get('luminix.frontend.routes.exclude', []) + ['luminix.init'])) {
+            if (in_array($name, Config::get('luminix.frontend.routes.exclude', []))) {
                 continue;
             }
 
