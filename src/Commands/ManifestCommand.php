@@ -25,8 +25,9 @@ class ManifestCommand extends Command
         /** @var ManifestService */
         $manifest = app(ManifestService::class);
 
-        if (!file_exists(resource_path('js/config'))) {
-            mkdir(resource_path('js/config'));
+        $directory = dirname($filepath);
+        if (!file_exists($directory)) {
+            mkdir($directory, 0755, true);
         }
 
         file_put_contents($filepath, json_encode($manifest->make($this->option('no-auth'))->get(), JSON_PRETTY_PRINT));
