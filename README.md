@@ -8,9 +8,9 @@ O pacote coleta informações da aplicação — configurações, usuário auten
 
 ## Requisitos
 
-- PHP `^8.2`
-- Laravel `^11.0`
-- [`luminix/backend`](https://github.com/luminix-cms/backend) `^1.0`
+- PHP 8.2+
+- Laravel 11, 12 ou 13
+- [`luminix/backend`](https://github.com/luminix-cms/backend) `^1.1`
 
 ---
 
