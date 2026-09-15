@@ -13,6 +13,14 @@ class FrontendServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../views', 'luminix');
 
+        // Installs the consumer skill into the app so it triggers without /luminix. The whole
+        // tree is copied, so refreshing it after a package upgrade takes `--force`. Shared tag
+        // across every luminix/* package -> one `vendor:publish --tag=luminix-skill` covers all
+        // of them.
+        $this->publishes([
+            __DIR__ . '/../skill' => base_path('.claude/skills/luminix-frontend'),
+        ], 'luminix-skill');
+
         $this->luminixEmbed();
 
     }
